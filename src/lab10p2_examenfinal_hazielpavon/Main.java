@@ -394,10 +394,10 @@ public class Main extends javax.swing.JFrame {
 
         if (edad < 12) {
             JOptionPane.showMessageDialog(jPanel1, "Debe ser mayor de 12 años para registrarse como cliente.");
-        } else if (tipo.equals("Artista")) {
-            if (edad < 18) {
-                JOptionPane.showMessageDialog(jPanel1, "Debe ser mayor de 18 años para registrarse como artista.");
-            }
+        } else if (tipo.equals("Artista") && edad < 18) {
+
+            JOptionPane.showMessageDialog(jPanel1, "Debe ser mayor de 18 años para registrarse como artista.");
+
         } else {
 
             String contrax = Ds_Contracrear.getText();
@@ -470,7 +470,6 @@ public class Main extends javax.swing.JFrame {
 
         String nombrex = Ds_nombre.getText();
         String usuario = Ds_usuario.getText();
-
         boolean encon = false;
 
         for (int i = 0; i < contra.size(); i++) {
@@ -493,21 +492,21 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jPanel1, "Ha ingresado");
 
             if (Ds_Tipo.getSelectedItem().equals("Artista")) {
-
                 Artista.pack();
                 Artista.setModal(true);
                 Artista.setLocationRelativeTo(this);
                 Artista.setVisible(true);
-
             } else {
                 spotify.pack();
                 spotify.setModal(true);
                 spotify.setLocationRelativeTo(this);
                 spotify.setVisible(true);
             }
+
+            Ds_nombre.setText("");
+            Ds_usuario.setText("");
         }
-        Ds_nombre.setText("");
-        Ds_usuario.setText("");
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
