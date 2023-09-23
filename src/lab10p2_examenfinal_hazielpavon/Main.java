@@ -644,10 +644,25 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton13.setText("Modificar");
+        jButton13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton13MouseClicked(evt);
+            }
+        });
 
         jButton14.setText("Eliminar");
+        jButton14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton14MouseClicked(evt);
+            }
+        });
 
         jButton15.setText("Modificar");
+        jButton15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton15MouseClicked(evt);
+            }
+        });
 
         jButton16.setText("Listar");
         jButton16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -675,8 +690,18 @@ public class Main extends javax.swing.JFrame {
         jScrollPane5.setViewportView(Ds_Tablasingles);
 
         jButton18.setText("Eliminar");
+        jButton18.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton18MouseClicked(evt);
+            }
+        });
 
         jButton19.setText("Modificar");
+        jButton19.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton19MouseClicked(evt);
+            }
+        });
 
         jLabel29.setForeground(new java.awt.Color(0, 255, 0));
         jLabel29.setText("Canciones");
@@ -731,10 +756,10 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel29)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -1273,12 +1298,131 @@ public class Main extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Selecciona un nombre para eliminar primero.");
         }
-    
 
 
     }//GEN-LAST:event_jButton12MouseClicked
 
-public static void main(String args[]) {
+    private void jButton14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton14MouseClicked
+
+        DefaultTableModel modelo = (DefaultTableModel) Ds_Tablasingles.getModel();
+
+        int filaSeleccionada = Ds_Tablasingles.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+
+            String nombreAEliminar = (String) modelo.getValueAt(filaSeleccionada, 0);
+
+            artista.getSingles().remove(nombreAEliminar);
+
+            modelo.removeRow(filaSeleccionada);
+
+            JOptionPane.showMessageDialog(this, "Se ha eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un nombre para eliminar primero.");
+        }
+    }//GEN-LAST:event_jButton14MouseClicked
+
+    private void jButton18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton18MouseClicked
+
+        DefaultTableModel modelo = (DefaultTableModel) Ds_Tablacanciones.getModel();
+
+        int filaSeleccionada = Ds_Tablacanciones.getSelectedRow();
+
+        if (filaSeleccionada != -1) {
+
+            String nombreAEliminar = (String) modelo.getValueAt(filaSeleccionada, 0);
+
+            artista.getCanciones().remove(nombreAEliminar);
+
+            modelo.removeRow(filaSeleccionada);
+
+            JOptionPane.showMessageDialog(this, "Se ha eliminado");
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecciona un nombre para eliminar primero.");
+        }
+
+
+    }//GEN-LAST:event_jButton18MouseClicked
+
+    private void jButton19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton19MouseClicked
+        DefaultTableModel modelo = (DefaultTableModel) Ds_Tablacanciones.getModel();
+        int rowCount = modelo.getRowCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            String titulo = (String) modelo.getValueAt(i, 0);
+            String nuevaDuracion = (String) modelo.getValueAt(i, 1);
+            String nuevaReferencia = (String) modelo.getValueAt(i, 2);
+
+            for (Cancion cancion : artista.getCanciones()) {
+                if (cancion.getTitulo().equals(titulo)) {
+                    cancion.setDuracion(nuevaDuracion);
+                    cancion.setRef(nuevaReferencia);
+                    break;
+                }
+            }
+
+            for (Album album : artista.getAlbumes()) {
+                for (Cancion cancion : album.getCanciones()) {
+                    if (cancion.getTitulo().equals(titulo)) {
+                        cancion.setDuracion(nuevaDuracion);
+                        cancion.setRef(nuevaReferencia);
+                        break;
+                    }
+                }
+            }
+
+            for (Single single : artista.getSingles()) {
+
+                if (single.getCancion().getTitulo().equals(titulo)) {
+                    single.getCancion().setDuracion(nuevaDuracion);
+                    single.getCancion().setRef(nuevaReferencia);
+                    break;
+                }
+
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Cambios guardados con éxito.");
+
+    }//GEN-LAST:event_jButton19MouseClicked
+
+    private void jButton13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton13MouseClicked
+        DefaultTableModel modeloAlbumes = (DefaultTableModel) Ds_TablaAlbumes.getModel();
+
+        int rowCountAlbumes = modeloAlbumes.getRowCount();
+        for (int i = 0; i < rowCountAlbumes; i++) {
+            String nuevoNombreAlbum = (String) modeloAlbumes.getValueAt(i, 0);
+            String nombreAlbumAnterior = artista.getAlbumes().get(i).getNombre();
+            artista.getAlbumes().get(i).setNombre(nuevoNombreAlbum);
+
+            for (Cancion cancion : artista.getAlbumes().get(i).getCanciones()) {
+                if (cancion.getRef().equals(nombreAlbumAnterior)) {
+                    cancion.setRef(nuevoNombreAlbum);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jButton13MouseClicked
+
+    private void jButton15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton15MouseClicked
+        DefaultTableModel modeloSingles = (DefaultTableModel) Ds_Tablasingles.getModel();
+
+        int rowCountSingles = modeloSingles.getRowCount();
+        for (int i = 0; i < rowCountSingles; i++) {
+            String nuevoNombreSingle = (String) modeloSingles.getValueAt(i, 0);
+            String nombreSingleAnterior = artista.getSingles().get(i).getNombrez();
+            artista.getSingles().get(i).setNombre(nuevoNombreSingle);
+
+            for (Single single : artista.getSingles()) {
+                if (single.getCancion().equals(nombreSingleAnterior)) {
+                    single.getCancion().setRef(nuevoNombreSingle);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_jButton15MouseClicked
+
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1290,27 +1434,23 @@ public static void main(String args[]) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
 
-}
+                }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class  
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-} catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class  
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-
-} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class  
-
-.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
