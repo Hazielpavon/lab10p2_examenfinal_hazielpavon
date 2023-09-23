@@ -6,19 +6,20 @@ package lab10p2_examenfinal_hazielpavon;
 
 public class Single {
 
-    Cancion cancion;
-    String nombre;
+    private Cancion cancion;
+    private String nombrez;
 
-    public Single(String nombre) {
-        this.nombre = nombre;
+    public Single(Cancion cancion, String nombrez) {
+        this.cancion = cancion;
+        this.nombrez = nombrez;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombrez() {
+        return nombrez;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String nombrez) {
+        this.nombrez = nombrez;
     }
 
     public Cancion getCancion() {

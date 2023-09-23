@@ -12,24 +12,12 @@ import java.util.ArrayList;
  */
 public class Artista {
 
-    String nombreart;
-    ArrayList<Cancion> canciones = new ArrayList();
-    ArrayList<Album> albumes = new ArrayList();
-    ArrayList<Single> singles = new ArrayList();
+    private String nombreart;
+    private ArrayList<Cancion> canciones = new ArrayList();
+    private ArrayList<Album> albumes = new ArrayList();
+    private ArrayList<Single> singles = new ArrayList();
 
     public Artista() {
-    }
-
-    public ArrayList<Single> getSingles() {
-        return singles;
-    }
-
-    public void setSingles(ArrayList<Single> singles) {
-        this.singles = singles;
-    }
-
-    public Artista(String nombreart) {
-        this.nombreart = nombreart;
     }
 
     public String getNombreart() {
@@ -40,20 +28,28 @@ public class Artista {
         this.nombreart = nombreart;
     }
 
-    public ArrayList getCanciones() {
+    public ArrayList<Cancion> getCanciones() {
         return canciones;
     }
 
-    public void setCanciones(ArrayList canciones) {
+    public void setCanciones(ArrayList<Cancion> canciones) {
         this.canciones = canciones;
     }
 
-    public ArrayList getAlbumes() {
+    public ArrayList<Album> getAlbumes() {
         return albumes;
     }
 
-    public void setAlbumes(ArrayList albumes) {
+    public void setAlbumes(ArrayList<Album> albumes) {
         this.albumes = albumes;
+    }
+
+    public ArrayList<Single> getSingles() {
+        return singles;
+    }
+
+    public void setSingles(ArrayList<Single> singles) {
+        this.singles = singles;
     }
 
     public void addCanciones(Cancion c) {
@@ -68,4 +64,12 @@ public class Artista {
         this.singles.add(s);
     }
 
+    @Override
+    public String toString() {
+        return "Artista: " + "nombreart = " + nombreart + ", canciones = " + canciones + ", albumes = " + albumes + ", singles = " + singles;
+    }
+
+    
+    
+    
 }

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class Album {
 
-    ArrayList<Cancion> Album = new ArrayList();
-    String nombre; 
+    private ArrayList<Cancion> Album = new ArrayList();
+    private String nombre; 
 
     public Album(String nombre) {
         this.nombre = nombre;
@@ -42,7 +42,7 @@ public class Album {
         this.Album = canciones;
     }
 
-    public void addaalbum(Cancion c) {
+    public void addcancion(Cancion c) {
         this.Album.add(c);
     }
 }

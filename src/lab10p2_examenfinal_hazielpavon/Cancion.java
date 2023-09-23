@@ -7,16 +7,19 @@ package lab10p2_examenfinal_hazielpavon;
 
 public class Cancion {
     
-    String titulo; 
+    private String titulo; 
     
-    String duracion; 
+    private String duracion; 
     
-    String ref; 
+    private String ref; 
 
     public Cancion(String titulo, String duracion, String ref) {
         this.titulo = titulo;
         this.duracion = duracion;
         this.ref = ref;
+    }
+
+    public Cancion() {
     }
 
     
