@@ -6,8 +6,10 @@ package lab10p2_examenfinal_hazielpavon;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class Main extends javax.swing.JFrame {
 
+    private String nombreart;
     private Artista artista = new Artista();
 
     public Main() {
@@ -46,6 +49,11 @@ public class Main extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Ds_Arbol1 = new javax.swing.JTree();
+        jButton10 = new javax.swing.JButton();
+        jLabel26 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -108,6 +116,10 @@ public class Main extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         Ds_Tablacanciones = new javax.swing.JTable();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -155,6 +167,54 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Inicio", jPanel3);
 
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Lanzamientos");
+        Ds_Arbol1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(Ds_Arbol1);
+
+        jButton10.setText("Llenar");
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton10MouseClicked(evt);
+            }
+        });
+
+        jLabel26.setFont(new java.awt.Font("sansserif", 3, 24)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 204, 51));
+        jLabel26.setText("Crear Listas");
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton10)))
+                .addGap(516, 516, 516))
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel26)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jButton10)
+                .addGap(48, 48, 48))
+        );
+
+        jTabbedPane2.addTab("Crear Listas", jPanel13);
+
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -198,7 +258,7 @@ public class Main extends javax.swing.JFrame {
             .addGap(0, 563, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Me gusta", jPanel6);
+        jTabbedPane2.addTab("Likeadas", jPanel6);
 
         javax.swing.GroupLayout spotifyLayout = new javax.swing.GroupLayout(spotify.getContentPane());
         spotify.getContentPane().setLayout(spotifyLayout);
@@ -233,10 +293,6 @@ public class Main extends javax.swing.JFrame {
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(529, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(213, 213, 213))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
@@ -245,22 +301,25 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Ds_NombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
+                        .addGap(297, 297, 297)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addGap(451, 451, 451)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(445, Short.MAX_VALUE))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel13)
-                .addGap(69, 69, 69)
+                .addGap(66, 66, 66)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Ds_NombreAlbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(172, 172, 172)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addComponent(jButton3)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addGap(202, 202, 202))
         );
 
         jTabbedPane3.addTab("Crear Album", jPanel11);
@@ -287,34 +346,33 @@ public class Main extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(529, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addGap(213, 213, 213))
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Ds_NombreSingle, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(301, 301, 301)
+                        .addGap(336, 336, 336)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(486, 486, 486)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(jLabel12)
-                .addGap(99, 99, 99)
+                .addGap(108, 108, 108)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Ds_NombreSingle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(172, 172, 172)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(173, 173, 173))
         );
 
         jTabbedPane3.addTab("Crear Single", jPanel10);
@@ -374,15 +432,13 @@ public class Main extends javax.swing.JFrame {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(403, Short.MAX_VALUE)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(213, 213, 213))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(Ds_Combosingle, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 449, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -404,11 +460,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel17))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(338, 338, 338)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -565,7 +623,7 @@ public class Main extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(0, 204, 51));
         jLabel14.setText("Lanzamientos");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Lanzamientos");
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Lanzamientos");
         Ds_Arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane1.setViewportView(Ds_Arbol);
 
@@ -822,6 +880,21 @@ public class Main extends javax.swing.JFrame {
             .addComponent(jTabbedPane3, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
+        jMenuItem1.setText("Agregar a Lista creada");
+        jMenuItem1.setActionCommand("Agregar a Lista creada");
+        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem1MouseClicked(evt);
+            }
+        });
+        jPopupMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Canciones Favoritas");
+        jPopupMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Likeadas");
+        jPopupMenu1.add(jMenuItem3);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -1026,57 +1099,36 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jPanel1, "Se ha guardado exitosamente");
 
             JFileChooser jfc = new JFileChooser();
-            FileNameExtensionFilter filtro
-                    = new FileNameExtensionFilter(
-                            "Archivos de Texto", "txt");
-            jfc.addChoosableFileFilter(filtro);
-            int seleccion = jfc.showSaveDialog(this);
-            FileWriter fw = null;
-            BufferedWriter bw = null;
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Haziel Docs", "vivamel");
+            jfc.setFileFilter(filtro);
+
+            int seleccion;
+            File fichero = null;
+
+            seleccion = jfc.showSaveDialog(this);
             if (seleccion == JFileChooser.APPROVE_OPTION) {
-                try {
+                String filePath = jfc.getSelectedFile().getPath();
+                if (!filePath.toLowerCase().endsWith(".vivamel")) {
+                    filePath += ".vivamel";
+                }
+                fichero = new File(filePath);
 
-                    File fichero = null;
-                    if (jfc.getFileFilter().getDescription().equals(
-                            "Archivos de Texto")) {
-                        fichero
-                                = new File(jfc.getSelectedFile().getPath() + ".txt");
-                    } else {
-                        fichero = jfc.getSelectedFile();
-                    }
-                    fw = new FileWriter(fichero, true);
-                    bw = new BufferedWriter(fw);
+                try ( FileOutputStream fw = new FileOutputStream(fichero);  ObjectOutputStream bw = new ObjectOutputStream(fw)) {
 
-                    bw.write("Bitacora" + "\n");
+                    bw.writeObject(n.toString());
 
-                    if (contra.size() == 0 && nombre.size() == 0) {
-
-                    } else {
-
-                        bw.write(n.toString());
-                        bw.write("\n");
-                    }
-                    bw.flush();
-                    JOptionPane.showMessageDialog(this,
-                            "Archivo guardado exitosamente");
-
+                    JOptionPane.showMessageDialog(this, "Datos agregados al archivo existente");
+              
                 } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al guardar los datos en el archivo: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }
-                try {
-                    bw.close();
-                    fw.close();
-                } catch (IOException ex) {
-                }
+
             }
         }
-
-        Ds_Nombrecrear.setText(
-                "");
-        Ds_Contracrear.setText(
-                "");
-        Ds_edad.setText(
-                "");
+        Ds_Nombrecrear.setText("");
+        Ds_Contracrear.setText("");
+        Ds_edad.setText("");
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -1109,6 +1161,9 @@ public class Main extends javax.swing.JFrame {
                 Artista.setModal(true);
                 Artista.setLocationRelativeTo(this);
                 Artista.setVisible(true);
+
+                nombreart = JOptionPane.showInputDialog(Artista, "Ingrese su nombre artistico");
+
             } else {
                 spotify.pack();
                 spotify.setModal(true);
@@ -1171,7 +1226,9 @@ public class Main extends javax.swing.JFrame {
         }
 
         for (Single single : artista.getSingles()) {
-            singlesNode.add(new DefaultMutableTreeNode(single.getNombrez()));
+            DefaultMutableTreeNode nodoSingle = new DefaultMutableTreeNode(single.getNombrez());
+            nodoSingle.add(new DefaultMutableTreeNode(single.getCancion().getTitulo()));
+            singlesNode.add(nodoSingle);
         }
 
         root.add(albumesNode);
@@ -1278,6 +1335,11 @@ public class Main extends javax.swing.JFrame {
         String n = Ds_NombreAlbum.getText();
 
         nombrealbumes.add(n);
+
+        JOptionPane.showMessageDialog(jPanel10, "Se ha guardado");
+
+        Ds_NombreAlbum.setText("");
+
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton12MouseClicked
@@ -1422,6 +1484,40 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton15MouseClicked
 
+    private void jButton10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MouseClicked
+
+        DefaultTreeModel modelo = (DefaultTreeModel) Ds_Arbol1.getModel();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Lanzamientos");
+        modelo.setRoot(root);
+        DefaultMutableTreeNode albumesNode = new DefaultMutableTreeNode("Álbumes");
+        DefaultMutableTreeNode singlesNode = new DefaultMutableTreeNode("Singles");
+
+        for (Album lanzamiento : artista.getAlbumes()) {
+            DefaultMutableTreeNode nodoAlbum = new DefaultMutableTreeNode(lanzamiento.getNombre());
+            for (Cancion cancion : lanzamiento.getCanciones()) {
+                nodoAlbum.add(new DefaultMutableTreeNode(cancion.getTitulo()));
+            }
+            albumesNode.add(nodoAlbum);
+        }
+
+        for (Single single : artista.getSingles()) {
+            DefaultMutableTreeNode nodoSingle = new DefaultMutableTreeNode(single.getNombrez());
+            nodoSingle.add(new DefaultMutableTreeNode(single.getCancion().getTitulo()));
+            singlesNode.add(nodoSingle);
+        }
+
+        root.add(albumesNode);
+        root.add(singlesNode);
+
+        Ds_Arbol1.setModel(modelo);
+
+    }//GEN-LAST:event_jButton10MouseClicked
+
+    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+
+
+    }//GEN-LAST:event_jMenuItem1MouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1465,6 +1561,7 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Artista;
     private javax.swing.JTree Ds_Arbol;
+    private javax.swing.JTree Ds_Arbol1;
     private javax.swing.JComboBox<String> Ds_Combosingle;
     private javax.swing.JTextField Ds_Contracrear;
     private javax.swing.JTextField Ds_NombreAlbum;
@@ -1485,6 +1582,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JSpinner Ds_primernum;
     private javax.swing.JTextField Ds_usuario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
@@ -1518,6 +1616,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
@@ -1528,10 +1627,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1540,8 +1643,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
